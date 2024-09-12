@@ -27,12 +27,12 @@ public class Config {
     /**
      * Whether to use "Virtual Gamepad" (true -> Virtual gamepad, false -> Real gamepad)
      */
-    public static final boolean USE_VIRTUAL_GAMEPAD = true;
+    public static final boolean USE_VIRTUAL_GAMEPAD = false;
 
     /**
      * The image object for the field.
      */
-    public static final Image BACKGROUND = new Image("/virtual_robot/assets/centerstage648.bmp");
+    public static final Image BACKGROUND = new Image("/virtual_robot/assets/into_the_deep.bmp");
 
     /**
      * If true, Virtual Gamepad joysticks and triggers will stay in the position where they were
