@@ -36,4 +36,14 @@ public class PassiveColorSensorImpl implements ColorSensor {
     public synchronized int alpha() {
         return alpha;
     }
+
+    @Override
+    public void enableLed(boolean enable) {
+
+    }
+
+    @Override
+    public int argb() {
+        return 0;
+    }
 }

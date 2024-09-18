@@ -874,6 +874,11 @@ public class VirtualRobotController {
         }
 
         @Override
+        public int argb() {
+            return 0;
+        }
+
+        @Override
         public String status() {
             return String.format(Locale.getDefault(), "%s on %s", getDeviceName(), getConnectionInfo());
         }

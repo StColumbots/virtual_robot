@@ -29,49 +29,56 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-/*
-Modified by FTC Team Beta 8397 for use in the Virtual_Robot Simulator
- */
+package org.firstinspires.ftc.teamcode.stcolumbots.common;
 
-package com.qualcomm.robotcore.hardware;
-
-import com.qualcomm.robotcore.hardware.HardwareDevice;
 
 /**
- * An abridged version of the FTC ColorSensor interface.
+ * Provide utility methods for debug logging
  */
-public interface ColorSensor extends HardwareDevice {
+public class DbgLog {
+    private DbgLog() {}
 
     /**
-     * @return Red channel value, 0..255
+     * Tag used by logcat
      */
-    public int red();
+    public static final String TAG = "FIRST";
+
+    public static final String ERROR_PREPEND = "### ERROR: ";
 
     /**
-     * @return Green channel value, 0..255
+     * Log a debug message
+     * @param message
      */
-    public int green();
+    public static void msg(String message) {
+        System.err.print(TAG);
+        System.err.println(message);
+    }
+
+    public static void msg(String format, Object... args) {
+        msg(String.format(format, args));
+    }
+
 
     /**
-     * @return Blue channel value, 0..255
+     * Log an error message
+     * <p>
+     * Messages will be prepended with the ERROR_PREPEND string
+     * @param message
      */
-    public int blue();
+    public static void error(String message) {
+        System.err.print(TAG);
+        System.err.print(ERROR_PREPEND);
+        System.err.println(message);
+    }
 
-    /**
-     * @return Alpha value 0..255
-     */
-    public int alpha();
+    public static void error(String format, Object... args) {
+        error(String.format(format, args));
+    }
 
-    /**
-     * Does nothing.
-     * @param state
-     */
-    void enableLed(boolean state);
-
-    /**
-     * Does nothing.
-     * @return 0
-     */
-    int argb();
-
+    public static void logStacktrace(Exception e) {
+        msg(e.toString());
+        for (StackTraceElement el : e.getStackTrace()) {
+            msg(el.toString());
+        }
+    }
 }
