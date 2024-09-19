@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="javafx-swt">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../zulu21.36.17-ca-fx-jdk21.0.4-win_x64/lib/javafx-swt.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/2024/Robotics/zulu21.36.17-ca-fx-jdk21.0.4-win_x64/zulu21.36.17-ca-fx-jdk21.0.4-win_x64/lib/javafx-swt.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
