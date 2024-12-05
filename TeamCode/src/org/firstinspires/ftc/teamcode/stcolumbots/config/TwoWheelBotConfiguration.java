@@ -43,7 +43,7 @@ public class TwoWheelBotConfiguration extends RobotConfiguration {
 
         colorSensor = hardwareMap.colorSensor.get("color_sensor");
 
-        gyroSensor = hardwareMap.gyroSensor.get("gyro_sensor");
+//        gyroSensor = hardwareMap.gyroSensor.get("gyro_sensor");
     }
 
 
