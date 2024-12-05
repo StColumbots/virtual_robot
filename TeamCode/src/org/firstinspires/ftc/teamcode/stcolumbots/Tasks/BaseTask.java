@@ -8,7 +8,7 @@ public abstract class BaseTask implements Task {
     protected boolean isFinished = false;
     protected double startTime = 0;
     protected StColumbotsOpMode opMode;
-]
+
     
 
     /**
