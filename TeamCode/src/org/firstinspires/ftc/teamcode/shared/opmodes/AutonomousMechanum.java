@@ -30,10 +30,10 @@ public class AutonomousMechanum extends RobotOpMode {
                 config.backLeftMotor, config.backRightMotor, true);
 
 //        tasks.add(new MecanumDriveTask(this, 1, drive, 1, 0, 0));
-        tasks.add(new GoToTask(this, 1, drive, config.otos, 250, 0, 0.3, 20));
-        tasks.add(new GoToTask(this, 1, drive, config.otos, 250, 250, 0.3, 20));
-        tasks.add(new GoToTask(this, 1, drive, config.otos, 0, 250, 0.3, 20));
-        tasks.add(new GoToTask(this, 1, drive, config.otos, 0, 0, 0.3, 20));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 500, 0, 0.3, 20, 1));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 500, 500, 90,0.3, 20, 20));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 500, 0, 180, 0.3, 20, 20));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 0, 270, 0.3, 20, 20));
 //        tasks.add(new MecanumDriveTask(this, 1, drive, 0, 1, 0));
 //        tasks.add(new MecanumDriveTask(this, 3, drive, 0, 0.1, 1));
 
