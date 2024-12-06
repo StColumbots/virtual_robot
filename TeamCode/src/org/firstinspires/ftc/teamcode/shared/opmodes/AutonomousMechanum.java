@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.shared.common.RobotOpMode;
 import org.firstinspires.ftc.teamcode.shared.config.MechanumBotConfiguration;
 import org.firstinspires.ftc.teamcode.shared.drive.NormalisedMecanumDrive;
+import org.firstinspires.ftc.teamcode.shared.tasks.GoToTask;
 import org.firstinspires.ftc.teamcode.shared.tasks.MecanumDriveTask;
 import org.firstinspires.ftc.teamcode.shared.tasks.Task;
 
@@ -28,11 +29,15 @@ public class AutonomousMechanum extends RobotOpMode {
                 config.frontLeftMotor, config.frontRightMotor,
                 config.backLeftMotor, config.backRightMotor, true);
 
-        tasks.add(new MecanumDriveTask(this, 1, drive, 1, 0, 0));
-        tasks.add(new MecanumDriveTask(this, 1, drive, 0, 1, 0));
-        tasks.add(new MecanumDriveTask(this, 3, drive, 0, 0.1, 1));
+//        tasks.add(new MecanumDriveTask(this, 1, drive, 1, 0, 0));
+        tasks.add(new GoToTask(this, 1, drive, config.otos, 250, 0, 0.3, 20));
+        tasks.add(new GoToTask(this, 1, drive, config.otos, 250, 250, 0.3, 20));
+        tasks.add(new GoToTask(this, 1, drive, config.otos, 0, 250, 0.3, 20));
+        tasks.add(new GoToTask(this, 1, drive, config.otos, 0, 0, 0.3, 20));
+//        tasks.add(new MecanumDriveTask(this, 1, drive, 0, 1, 0));
+//        tasks.add(new MecanumDriveTask(this, 3, drive, 0, 0.1, 1));
 
-        config.otos.setOffset(new SparkFunOTOS.Pose2D(0,0,90));
+        config.otos.setOffset(new SparkFunOTOS.Pose2D(0,0,0));
 
     }
 

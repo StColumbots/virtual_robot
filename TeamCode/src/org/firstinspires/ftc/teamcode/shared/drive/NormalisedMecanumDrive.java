@@ -46,6 +46,11 @@ public class NormalisedMecanumDrive extends RobotComponent {
         this.backLeftMotor = backLeftMotor;
         this.backRightMotor = backRightMotor;
         this.showTelemetry = showTelemetry;
+//
+//        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+//        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
