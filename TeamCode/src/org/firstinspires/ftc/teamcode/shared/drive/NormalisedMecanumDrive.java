@@ -106,29 +106,29 @@ public class NormalisedMecanumDrive extends RobotComponent {
         double backLeftPower = speedX - speedY - speedR;
         double backRightPower = speedX + speedY + speedR;
 
-        double px = speedX;
-        double py = speedY;
-        double pa = speedR;
-
-        double p1 = -px + py - pa;
-        double p2 = px + py + -pa;
-        double p3 = -px + py + pa;
-        double p4 = px + py + pa;
+//        double px = speedX;
+//        double py = speedY;
+//        double pa = speedR;
+//
+//        double p1 = -px + py - pa;
+//        double p2 = px + py + -pa;
+//        double p3 = -px + py + pa;
+//        double p4 = px + py + pa;
 
 //
 //        DcMotor m1 = hardwareMap.dcMotor.get("back_left_motor");
 //        DcMotor m2 = hardwareMap.dcMotor.get("front_left_motor");
 //        DcMotor m3 = hardwareMap.dcMotor.get("front_right_motor");
 //        DcMotor m4 = hardwareMap.dcMotor.get("back_right_motor");
-//
-        double max = Math.max(1.0, Math.abs(p1));
-        max = Math.max(max, Math.abs(p2));
-        max = Math.max(max, Math.abs(p3));
-        max = Math.max(max, Math.abs(p4));
-        p1 /= max;
-        p2 /= max;
-        p3 /= max;
-        p4 /= max;
+////
+//        double max = Math.max(1.0, Math.abs(p1));
+//        max = Math.max(max, Math.abs(p2));
+//        max = Math.max(max, Math.abs(p3));
+//        max = Math.max(max, Math.abs(p4));
+//        p1 /= max;
+//        p2 /= max;
+//        p3 /= max;
+//        p4 /= max;
 //        m1.setPower(p1);
 //        m2.setPower(p2);
 //        m3.setPower(p3);
