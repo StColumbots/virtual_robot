@@ -55,18 +55,15 @@ public class GoToTask extends BaseTask  implements Task {
         distance = Math.sqrt(deltax*deltax+deltay*deltay);
         double angle = Math.atan2(deltay, deltax);
         angle_distance = unaliasAngle(target_h - current.h);
-//        double speed = max_speed;
-//        if (distance < 300) {
-//            speed = distance/300;
-//            if (speed < 0.1) {
-//                speed = 0.1;
-//            }
-//        }
+
         double speed = Math.min(Math.abs(distance / 100)+0.1, max_speed) * Math.signum(distance);
         double max_delta_pos = Math.max(Math.abs(deltax),Math.abs(deltay));
-        double speedx = (max_delta_pos > 0.0) ? deltax / max_delta_pos * speed : 0.0;
-        double speedy = (max_delta_pos > 0.0) ? deltay / max_delta_pos * speed : 0.0;
-        double speedr = Math.min(Math.abs(angle_distance / 30)+0.1, max_speed) * Math.signum(angle_distance);
+        if (max_delta_pos < 2*distance_error)  {
+            max_delta_pos = 2*distance_error;
+        }
+        double speedx = (max_delta_pos > 0.01) ? deltax / max_delta_pos * speed : 0.0;
+        double speedy = (max_delta_pos > 0.01) ? deltay / max_delta_pos * speed : 0.0;
+        double speedr = Math.min(Math.abs(angle_distance / 30), max_speed/2) * Math.signum(angle_distance);
 
         System.out.println(String.format("dX %4.2f sX: %4.2f  dY %4.2f sY: %4.2f  d %4.2f dh %4.1f h: %4.1f sH: %4.2f heading %4.1f", deltax, speedx, deltay, speedy, distance, angle_distance, current.h, speedr, angle*180.0/Math.PI));
         opMode.telemetry.addLine("Distance: " + distance);

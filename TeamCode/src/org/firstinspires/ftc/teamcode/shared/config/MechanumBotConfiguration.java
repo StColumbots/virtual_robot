@@ -54,6 +54,7 @@ public class MechanumBotConfiguration extends RobotConfiguration {
         otos.setAngularUnit(AngleUnit.DEGREES);
         otos.setLinearUnit(DistanceUnit.MM);
         otos.resetTracking();
+        otos.setOffset(new SparkFunOTOS.Pose2D(0,0,0));
 
     }
 

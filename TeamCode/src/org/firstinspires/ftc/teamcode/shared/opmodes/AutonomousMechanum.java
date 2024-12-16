@@ -29,17 +29,17 @@ public class AutonomousMechanum extends RobotOpMode {
                 config.frontLeftMotor, config.frontRightMotor,
                 config.backLeftMotor, config.backRightMotor, true);
 
-//        tasks.add(new MecanumDriveTask(this, 1, drive, 1, 0, 0));
-//        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 600, 90, 0.5, 20, 5));
-//        tasks.add(new GoToTask(this, 6, drive, config.otos, 600, 600, 181,0.5, 20, 5));
-//        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 600, 269, 0.5, 20, 5));
-//        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 0, 0, 0.5, 20, 5));
-        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 500, 0, 0.5, 20, 5));
+        tasks.add(new MecanumDriveTask(this, 1, drive, 1, 0, 0));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 600, 90, 0.5, 20, 5));
+        tasks.add(new GoToTask(this, 6, drive, config.otos, 600, 600, 181,0.5, 20, 5));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 600, 269, 0.5, 20, 5));
+        tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 0, 0, 0.5, 20, 5));
+        tasks.add(new GoToTask(this, 30, drive, config.otos, 0, 500, 90, 0.5, 5, 5));
         tasks.add(new GoToTask(this, 6, drive, config.otos, 500, 500, 0,0.5, 20, 5));
         tasks.add(new GoToTask(this, 4, drive, config.otos, 500, 0, 0, 0.5, 20, 5));
         tasks.add(new GoToTask(this, 4, drive, config.otos, 0, 0, 0, 0.5, 20, 5));
-//        tasks.add(new MecanumDriveTask(this, 1, drive, 0, 1, 0));
-//        tasks.add(new MecanumDriveTask(this, 3, drive, 0, 0.1, 1));
+        tasks.add(new MecanumDriveTask(this, 1, drive, 0, 1, 0));
+        tasks.add(new MecanumDriveTask(this, 3, drive, 0, 0.1, 1));
 
         config.otos.setOffset(new SparkFunOTOS.Pose2D(0,0,0));
 
