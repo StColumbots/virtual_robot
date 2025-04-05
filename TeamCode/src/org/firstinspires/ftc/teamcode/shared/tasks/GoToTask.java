@@ -19,7 +19,13 @@ public class GoToTask extends BaseTask  implements Task {
     private final double angle_error;
     private SparkFunOTOS.Pose2D current;
     private double distance;
-    private double angle_distance;
+    private double h_distance;
+
+    private double last_speedX = 0.0;
+    private double last_speedY = 0.0;
+    private double last_speedR = 0.0;
+    private double last_distance = 0.0;
+
 
     public GoToTask(RobotOpMode opMode, double time, NormalisedMecanumDrive drive, SparkFunOTOS odometry,
                     double x, double y, double h, double speed, double distance_error, double angle_error) {
@@ -32,7 +38,7 @@ public class GoToTask extends BaseTask  implements Task {
         this.target_h = h;
         this.max_speed = speed;
         this.distance_error = distance_error;
-        this.angle_error = angle_error;
+        this.angle_error = angle_error/180*Math.PI;
     }
 
     @Override
@@ -41,7 +47,7 @@ public class GoToTask extends BaseTask  implements Task {
         double deltax = target_x - current.x;
         double deltay = target_y - current.y;
         distance = Math.sqrt(deltax*deltax+deltay*deltay);
-        angle_distance = target_h - current.h;
+        h_distance = target_h - current.h;
         opMode.telemetry.addLine("distance " + distance);
     }
 
@@ -49,23 +55,35 @@ public class GoToTask extends BaseTask  implements Task {
     public void run() {
         current = odometry.getPosition();
 
-
         double deltax = target_x - current.x;
         double deltay = target_y - current.y;
         distance = Math.sqrt(deltax*deltax+deltay*deltay);
         double angle = Math.atan2(deltay, deltax);
-        angle_distance = unaliasAngle(target_h - current.h);
+        h_distance = unaliasAngle(target_h - current.h);
 
-        double speed = Math.min(Math.abs(distance / 100)+0.1, max_speed) * Math.signum(distance);
-        double max_delta_pos = Math.max(Math.abs(deltax),Math.abs(deltay));
-        if (max_delta_pos < 2*distance_error)  {
-            max_delta_pos = 2*distance_error;
+        double speed_x_adj = (Math.abs(deltax) > 2 * distance_error) ? 1.0 : (Math.abs(deltax) / (2 * distance_error));
+        double speed_y_adj = (Math.abs(deltay) > 2 * distance_error) ? 1.0 : (Math.abs(deltay) / (2 * distance_error));
+
+        double speedx = Math.cos(angle)*max_speed*speed_x_adj;
+        double speedy = Math.sin(angle)*max_speed*speed_y_adj;
+        double speedr = Math.min(Math.abs(h_distance / 30), max_speed/2) * Math.signum(h_distance);
+
+        if (Math.abs(h_distance) < angle_error) {
+            speedr = 0.0;
         }
-        double speedx = (max_delta_pos > 0.01) ? deltax / max_delta_pos * speed : 0.0;
-        double speedy = (max_delta_pos > 0.01) ? deltay / max_delta_pos * speed : 0.0;
-        double speedr = Math.min(Math.abs(angle_distance / 30), max_speed/2) * Math.signum(angle_distance);
 
-        System.out.println(String.format("dX %4.2f sX: %4.2f  dY %4.2f sY: %4.2f  d %4.2f dh %4.1f h: %4.1f sH: %4.2f heading %4.1f", deltax, speedx, deltay, speedy, distance, angle_distance, current.h, speedr, angle*180.0/Math.PI));
+//        if (last_distance < distance) {
+//            drive.setSpeedXYR(0,0,0);
+//            drive.update();
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//        last_distance = distance;
+
+        System.out.println(String.format("Target[%4.2f,%4.2f] - Current[%4.2f,%4.2f] dX %4.2f sX: %4.2f dY %4.2f sY: %4.2f  d %4.2f dh %4.1f h: %4.1f sH: %4.2f ", target_x, target_y, current.x, current.y, deltax, speedx, deltay, speedy, distance, h_distance, current.h, speedr));
         opMode.telemetry.addLine("Distance: " + distance);
         opMode.telemetry.addLine("Angle: " + angle);
         opMode.telemetry.addLine("Speed: " + max_speed);
@@ -76,13 +94,14 @@ public class GoToTask extends BaseTask  implements Task {
 
 
         drive.setSpeedXYR(speedx, -speedy, speedr);
+//        drive.setSpeedPolarR(max_speed, -angle * 180 / Math.PI, speedr);
 //        drive.setSpeedXYR(deltax/distance, 0, 0);
         drive.update();
     }
 
     @Override
     public boolean isFinished() {
-        return super.isFinished() || (distance < distance_error && angle_distance < angle_error);
+        return super.isFinished() || (distance < distance_error && h_distance < angle_error);
     }
 
     public static double unaliasAngle(double angle) {

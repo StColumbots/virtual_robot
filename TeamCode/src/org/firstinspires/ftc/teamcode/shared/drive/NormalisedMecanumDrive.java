@@ -46,11 +46,6 @@ public class NormalisedMecanumDrive extends RobotComponent {
         this.backLeftMotor = backLeftMotor;
         this.backRightMotor = backRightMotor;
         this.showTelemetry = showTelemetry;
-//
-//        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-//        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-//        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -95,7 +90,7 @@ public class NormalisedMecanumDrive extends RobotComponent {
                 break;
         }
         if (item != null) {
-            item.setValue("Forward: %4.2f, Strafe: %4.2f, Rotate: %4.2f", speedX, speedY, speedR);
+            item.setValue("F: %4.2f, Strf: %4.2f, Rot: %4.2f", speedX, speedY, speedR);
         }
     }
 
